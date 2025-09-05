@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Application.Contracts.Persistence;
+using BookStore.Application.DTO.Author.Validators;
 using BookStore.Application.Features.Author.Requests.Commands;
 using BookStore.Application.Responses;
 using BookStore.Domain;
@@ -25,14 +26,27 @@ namespace BookStore.Application.Features.Author.Handlers.Commands
         public async Task<BaseCommandResponse> Handle(CreateAuthorCommandRequest request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
+            var validator = new CreateAuthorDtoValidator();
+            var validationResult = await validator.ValidateAsync(request.AuthorCreateDto);
 
-            var authorEitity = _mapper.Map<BookStore.Domain.Author>(request.AuthorCreateDto);
-            var author = _authorsRepository.AddAsync(authorEitity);
+            if (!validationResult.IsValid)
+            {
+                response.Success = false;
+                response.Message = "Creation Failed";
+                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            }
+            else
+            {
 
-            response.Success = true;
-            response.Message = "Creation Successful";
-            response.Id = author.Id;
-            return response;
+                var authorEitity = _mapper.Map<BookStore.Domain.Author>(request.AuthorCreateDto);
+                var author = await _authorsRepository.AddAsync(authorEitity);
+
+                response.Success = true;
+                response.Message = "Creation Successful";
+                response.Id = author.Id;
+            }
+                return response;
+
         }
     }
 }
