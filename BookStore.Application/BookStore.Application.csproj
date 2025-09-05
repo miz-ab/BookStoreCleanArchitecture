@@ -15,9 +15,4 @@
     <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Author\Handlers\Commands\" />
-    <Folder Include="Features\Author\Requests\Commands\" />
-  </ItemGroup>
-
 </Project>
