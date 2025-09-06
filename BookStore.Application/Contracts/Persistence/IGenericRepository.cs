@@ -13,6 +13,6 @@ namespace BookStore.Application.Contracts.Persistence
         Task<bool> Exists(int id);
         Task<List<T>> GetAllAsync();
         Task<T> GetAsync(int? id);
-        Task UpdateAsync(T entity);
+        Task<T> UpdateAsync(T entity);
     }
 }

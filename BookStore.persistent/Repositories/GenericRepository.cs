@@ -54,10 +54,12 @@ namespace BookStore.persistent.Repositories
             return await context.Set<T>().FindAsync(id);
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             context.Update(entity);
             await context.SaveChangesAsync();
+            context.Entry(entity).Reload();
+            return entity;
         }
     }
 }
