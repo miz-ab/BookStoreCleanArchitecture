@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Features.Author.Requests.Commands
 {
-    public class UpdateAuthorCommand : IRequest<BaseCommandResponse>
+    public class UpdateAuthorCommandRequest : IRequest<BaseCommandResponse>
     {
         public AuthorUpdateDto AuthorUpdateDto { get; set; }
     }

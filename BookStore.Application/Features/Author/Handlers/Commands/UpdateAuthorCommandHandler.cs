@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Features.Author.Handlers.Commands
 {
-    public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, BaseCommandResponse>
+    public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommandRequest, BaseCommandResponse>
     {
         private readonly IAuthorsRepository _authorsRepository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace BookStore.Application.Features.Author.Handlers.Commands
         }
 
 
-        public async Task<BaseCommandResponse> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse> Handle(UpdateAuthorCommandRequest request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
             var author = await _authorsRepository.GetAsync(request.AuthorUpdateDto.Id);

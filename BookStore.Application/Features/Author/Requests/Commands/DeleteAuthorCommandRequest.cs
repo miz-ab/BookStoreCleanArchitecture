@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Features.Author.Requests.Commands
 {
-    public class DeleteAuthorCommand : IRequest<BaseCommandResponse>
+    public class DeleteAuthorCommandRequest : IRequest<BaseCommandResponse>
     {
         public int Id { get; set; }
     }
